@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://xuzhihao:8848
+      config:
+        server-addr: http://xuzhihao:8848
+        file-extension: yaml

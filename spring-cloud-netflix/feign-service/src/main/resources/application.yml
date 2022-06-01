@@ -1,0 +1,45 @@
+server:
+  port: 8701
+spring:
+  application:
+    name: feign-service
+eureka:
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+      lease-renewal-interval-in-seconds: 5 #每隔几秒告诉eureka服务器我还存活，用于心跳检测 默认30 
+      lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除 默认90
+   client:
+      healthcheck:
+         enabled: false
+      serviceUrl:
+         defaultZone: http://admin:admin@127.0.0.1:9001/eureka/
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+feign:
+  hystrix:
+    enabled: true #在Feign中开启Hystrix
+### Ribbon 配置
+ribbon:
+  # 连接超时
+  ConnectTimeout: 2000
+  # 响应超时
+  ReadTimeout: 5000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 #默认的连接超时时间1秒,若1秒没有返回数据,自动的触发降级逻辑
+      circuitBreaker:
+        enabled: true
+        requestVolumeThreshold: 5
+        errorThresholdPercentage: 10
+        sleepWindowInMilliseconds: 10000
+logging:
+  level:
+    net.xzh.feign.service.UserService: debug

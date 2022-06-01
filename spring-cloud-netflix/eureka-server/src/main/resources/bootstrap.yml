@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: stand
+  application:
+    name: eureka-server

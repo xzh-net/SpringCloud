@@ -1,0 +1,35 @@
+server:
+   port: 8001
+spring:
+   application:
+      name: config-server
+   cloud:
+      config:
+         server:
+            git:
+               uri: https://gitee.com/xzh-net/config-repostory
+               clone-on-start: true #开启启动时直接从git获取配置
+   rabbitmq:
+      host: 172.17.17.137
+      port: 5672
+      username: guest
+      password: guest
+eureka:
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+      lease-renewal-interval-in-seconds: 5 #每隔几秒告诉eureka服务器我还存活，用于心跳检测 默认30 
+      lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除 默认90
+   client:
+      healthcheck:
+         enabled: true
+      serviceUrl:
+         defaultZone: http://admin:admin@127.0.0.1:9001/eureka/
+management:
+   endpoints:
+     web:
+       exposure:
+         include: bus-refresh
+   endpoint:
+      health:
+         show-details: always

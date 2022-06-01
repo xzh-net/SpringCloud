@@ -1,0 +1,35 @@
+server:
+   port: 9001
+spring:
+   security:
+      user:
+         name: admin
+         password: admin
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+   endpoint:
+      health:
+         show-details: always
+eureka:
+   instance:
+      hostname: eureka0
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+      lease-renewal-interval-in-seconds: 5 #每隔几秒告诉eureka服务器我还存活，用于心跳检测 默认30 
+      lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除 默认90
+   server:
+      enable-self-preservation: false #关闭服务器自我保护，客户端心跳检测15分钟内错误达到80%服务会保护，导致别人还认为是好用的服务
+      eviction-interval-timer-in-ms: 5000 # 清理间隔（单位毫秒，默认是60*1000）启用主动失效，并且每次主动失效检测间隔为3s 
+   client:
+      register-with-eureka: false #是否将自己注册到注册中心
+      fetch-registry: false #是否从eureka中获取注册信息
+      instance-info-replication-interval-seconds: 10
+      registry-fetch-interval-seconds: 30 #从eureka服务端获取注册信息的间隔时间
+      serviceUrl:
+         defaultZone: http://admin:admin@eureka0:9001/eureka/ ## 集群配置另外两个的地址
+         
+logging:
+  level:
+    com.netflix: warn

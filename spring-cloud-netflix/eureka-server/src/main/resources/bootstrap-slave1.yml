@@ -1,0 +1,33 @@
+server:
+   port: 9001
+spring:
+   security:
+      user:
+         name: admin
+         password: admin
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'
+   endpoint:
+      health:
+         show-details: always
+eureka:
+   server:
+      enable-self-preservation: true #关闭服务器自我保护，客户端心跳检测15分钟内错误达到80%服务会保护，导致别人还认为是好用的服务
+      eviction-interval-timer-in-ms: 15000 #清理间隔（单位毫秒，默认是60*1000）15秒将客户端剔除的服务在服务注册列表中剔除# 
+   client:
+      serviceUrl:
+         defaultZone: http://admin:admin@eureka2:9002/eureka,http://admin:admin@eureka3:9003/eureka
+   instance:
+      hostname: eureka1
+      appname: eureka-server
+      prefer-ip-address: false
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+      lease-renewal-interval-in-seconds: 10 # 续约更新时间间隔（默认30秒）
+      lease-expiration-duration-in-seconds: 30 # 续约到期时间（默认90秒）
+         
+logging:
+  level:
+    com.netflix: warn

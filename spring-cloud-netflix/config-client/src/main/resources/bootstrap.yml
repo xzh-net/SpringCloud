@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: pro
+  cloud:
+    config: #Config客户端配置
+      name: config-client #应用名称,需要对应git中配置文件名称的前半部分
+      profile: pro #启用配置后缀名称
+      label: master #分支名称
+      discovery:
+        enabled: true #开启服务发现
+        service-id: config-server
+eureka:
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+      lease-renewal-interval-in-seconds: 5 #每隔几秒告诉eureka服务器我还存活，用于心跳检测 默认30 
+      lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除 默认90
+   client:
+      healthcheck:
+         enabled: false
+      serviceUrl:
+         defaultZone: http://admin:admin@127.0.0.1:9001/eureka/

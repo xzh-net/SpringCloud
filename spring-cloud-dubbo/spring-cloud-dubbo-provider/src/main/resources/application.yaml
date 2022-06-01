@@ -1,0 +1,19 @@
+server:
+  port: 8080
+dubbo:
+  scan:
+    base-packages: net.xzh.dubbo.service # 开启包扫描
+  protocols:
+    dubbo:
+      name: dubbo # 服务协议
+      port: -1 # 服务端口
+  registry:
+    address: spring-cloud://xuzhihao # 注册中心
+management: #开启SpringBoot Admin的监控
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

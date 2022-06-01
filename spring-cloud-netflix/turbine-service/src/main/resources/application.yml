@@ -1,0 +1,25 @@
+server:
+  port: 8601
+spring:
+  application:
+    name: turbine-service
+eureka:
+   instance:
+      prefer-ip-address: true
+      instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+      lease-renewal-interval-in-seconds: 5 #每隔几秒告诉eureka服务器我还存活，用于心跳检测 默认30 
+      lease-expiration-duration-in-seconds: 10 #如果心跳检测一直没有发送，10秒后会从eureka服务器中将此服务剔除 默认90
+   client:
+      healthcheck:
+         enabled: false
+      serviceUrl:
+         defaultZone: http://admin:admin@127.0.0.1:9001/eureka/
+turbine:
+  app-config: hystrix-service #指定需要收集信息的服务名称
+  cluster-name-expression: new String('default') #指定服务所属集群
+  combine-host-port: true #以主机名和端口号来区分服务
+management:
+   endpoints:
+      web:
+         exposure:
+            include: '*'

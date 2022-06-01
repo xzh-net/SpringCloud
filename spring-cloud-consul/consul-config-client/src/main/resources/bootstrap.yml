@@ -1,0 +1,37 @@
+server:
+  port: 7003
+spring:
+  application:
+    name: consul-config-client
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        #是否需要注册
+        register: true
+        #注册的实例ID (唯一标志)
+        instance-id: ${spring.application.name}:${server.port}-1
+        #服务的名称
+        service-name: ${spring.application.name}
+        #服务的请求端口
+        port: ${server.port}
+        #健康检查路径
+        healthCheckPath: /actuator/health
+        #健康检查时间间隔
+        healthCheckInterval: 15s
+        #开启ip地址注册
+        prefer-ip-address: true
+        #实例的请求ip
+        ip-address: ${spring.cloud.client.ip-address}
+      config:
+        enabled: true #是否启用配置中心功能
+        format: yaml #设置配置值的格式
+        prefix: config #设置配置所在目录
+        profile-separator: ':' #设置配置的分隔符
+        data-key: data #配置key的名字，由于Consul是K/V存储，配置存储在对应K的V中
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
