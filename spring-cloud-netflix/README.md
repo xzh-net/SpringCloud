@@ -299,7 +299,338 @@ http://localhost:8801/actuator/routes/details
 
 - 断言
 
+  - After Route Predicate 在指定时间之后的请求会匹配该路由
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: after_route
+              uri: ${service-url.user-service}
+              predicates:
+                - After=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+    
+    ```
+
+  - Before Route Predicate 在指定时间之前的请求会匹配该路由
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: before_route
+              uri: ${service-url.user-service}
+              predicates:
+                - Before=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+    
+    ```
+
+  - Between Route Predicate 在指定时间区间内的请求会匹配该路由
+    
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: before_route
+              uri: ${service-url.user-service}
+              predicates:
+                - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
+    ```
+    
+  - Cookie Route Predicate 带有指定Cookie的请求会匹配该路由
+
+    ```
+     spring:
+          cloud:
+            gateway:
+              routes:
+                - id: cookie_route
+                  uri: ${service-url.user-service}
+                  predicates:
+                    - Cookie=username,xzh
+    ```
+
+    使用curl工具发送带有cookie为username=macro的请求可以匹配该路由
+
+    ```
+    curl http://localhost:8801/user-service/user/1 --cookie "username=xzh"
+    ```
+
+  - Header Route Predicate 带有指定请求头的请求会匹配该路由
+  
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: header_route
+            uri: ${service-url.user-service}
+            predicates:
+            - Header=X-Request-Id, \d+
+    ```
+  
+    使用curl工具发送带有请求头为`X-Request-Id:123`的请求可以匹配该路由。
+  
+    ```
+    curl http://localhost:8801/user-service/user/1 -H "X-Request-Id:123" 
+    ```
+
+  - Host Route Predicate 带有指定Host的请求会匹配该路由
+    
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: host_route
+              uri: ${service-url.user-service}
+              predicates:
+                - Host=**.xuzhihao.net
+    ```
+    
+    使用curl工具发送带有请求头为`Host:www.xuzhihao.net`的请求可以匹配该路由。
+    
+    ```
+    curl http://localhost:8801/user-service/user/1 -H "Host:www.xuzhihao.com" 
+    ```
+    
+  - Method Route Predicate 发送指定方法的请求会匹配该路由
+  
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: method_route
+            uri: ${service-url.user-service}
+            predicates:
+            - Method=GET
+    ```
+  
+    使用curl工具发送GET请求可以匹配该路由
+  
+    ```
+    curl http://localhost:8801/user-service/user/1
+    ```
+  
+  - Path Route Predicate 发送指定路径的请求会匹配该路由
+  
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: path_route
+              uri: ${service-url.user-service}/user/{id}
+              predicates:
+                - Path=/user/{id}
+    ```
+  
+  - Query Route Predicate 带指定查询参数的请求可以匹配该路由
+  
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: query_route
+            uri: ${service-url.user-service}/user/getByUsername
+            predicates:
+            - Query=username
+    ```
+  
+    ```bash
+    curl http://localhost:9201/user/getByUsername?username=xzh
+    ```
+    
+  - RemoteAddr Route Predicate 从指定远程地址发起的请求可以匹配该路由
+  
+  ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: remoteaddr_route
+            uri: ${service-url.user-service}
+            predicates:
+            - RemoteAddr=192.168.1.1/24
+  ```
+  
+  
+  
+  - Weight Route Predicate 使用权重来路由相应请求
+  
+    以下表示有80%的请求会被路由到localhost:8201，20%会被路由到localhost:8202
+  
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: weight_high
+            uri: http://localhost:8201
+            predicates:
+            - Weight=group1, 8
+          - id: weight_low
+            uri: http://localhost:8202
+            predicates:
+            - Weight=group1, 2
+    ```
+  
+    
+  
 - 过滤器
+
+  - AddRequestParameter 
+
+    给请求添加参数的过滤器
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: add_request_parameter_route
+              uri: http://localhost:8201
+              filters:
+                - AddRequestParameter=username, xzh
+              predicates:
+                - Method=GET
+    
+    ```
+
+    ```bash
+    curl http://localhost:9201/user/getByUsername 转换成
+    http://localhost:8201/user/getByUsername?username=xzh
+    ```
+    
+
+  - StripPrefix 
+
+    对指定数量的路径前缀进行去除的过滤器
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: strip_prefix_route
+            uri: http://localhost:8201
+            predicates:
+            - Path=/user-service/**
+            filters:
+            - StripPrefix=2
+    ```
+
+    ```bash
+    curl http://localhost:9201/user-service/user/1 转换成
+    curl http://localhost:8201/user/1
+    ```
+
+  - PrefixPath 
+
+    与StripPrefix过滤器恰好相反，会对原有路径进行增加操作的过滤器
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: prefix_path_route
+            uri: http://localhost:8201
+            predicates:
+            - Method=GET
+            filters:
+            - PrefixPath=/user
+    ```
+
+    ```bash
+    curl http://localhost:9201/1 转换成
+    curl http://localhost:8201/user/1
+    ```
+
+  - Hystrix Hystrix 
+
+    过滤器允许你将断路器功能添加到网关路由中，使你的服务免受级联故障的影响，并提供服务降级处理
+
+    ```
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+    </dependency>
+    ```
+
+    ```java
+    /**
+     * 熔断降级处理
+     */
+    @RestController
+    public class FallbackController {
+    
+        @GetMapping("/fallback")
+        public Object fallback() {
+            Map<String,Object> result = new HashMap<>();
+            result.put("data",null);
+            result.put("message","Get request fallback!");
+            result.put("code",500);
+            return result;
+        }
+    }
+    ```
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+            - id: hystrix_route
+              uri: http://localhost:8201
+              predicates:
+                - Method=GET
+              filters:
+                - name: Hystrix
+                  args:
+                    name: fallbackcmd
+                    fallbackUri: forward:/fallback
+    ```
+
+    关闭user-service，调用该地址进行测试：http://localhost:9201/user/1 
+
+  - RequestRateLimiter
+
+    用于限流，使用RateLimiter实现来确定是否允许当前请求继续进行，如果请求太大默认会返回HTTP 429-太多请求状态
+
+    见基于redis令牌桶限流配置
+
+  - Retry 给请求添加参数的过滤器
+
+    对路由请求进行重试的过滤器，可以根据路由请求返回的HTTP状态码来确定是否进行重试
+
+    ```
+    spring:
+      cloud:
+        gateway:
+          routes:
+          - id: retry_route
+            uri: http://localhost:8201
+            predicates:
+            - Method=GET
+            filters:
+            - name: Retry
+              args:
+                retries: 1 #需要进行重试的次数
+                statuses: BAD_GATEWAY #返回哪个状态码需要进行重试，返回状态码为5XX进行重试
+                backoff:
+                  firstBackoff: 10ms
+                  maxBackoff: 50ms
+                  factor: 2
+                  basedOnPreviousValue: false
+    ```
+
+    - 当调用返回500时会进行重试，访问测试地址：http://localhost:9201/user/111，user-service控制台报错2次，说明进行了一次重试
 
 - 限流
 
