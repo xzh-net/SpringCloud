@@ -7,9 +7,9 @@ mvn clean package
 
 ```
 spring-cloud-consul
-├── consul-user-service -- User对象CRUD接口的服务
-├── consul-config-client -- 配置中心客户端
-└── consul-ribbon-service -- ribbon服务调用测试服务
+├── consul-config-client -- 配置中心客户端 6101 
+├── consul-ribbon-service -- ribbon服务调用测试服务 6201
+└── consul-user-service -- User对象CRUD接口的服务 6301
 
 <spring-boot-dependencies.version>2.1.7.RELEASE</spring-boot-dependencies.version>
 <spring-cloud.version>Greenwich.SR5</spring-cloud.version>
