@@ -10,12 +10,12 @@
 	<packaging>pom</packaging>
 	
 	<modules>
-		<module>nacos-admin-server</module>
-		<module>nacos-config-client</module>
-		<module>nacos-retrofit-service</module>
-		<module>nacos-ribbon-service</module>
-		<module>nacos-user-service</module>
-		<module>nacos-sentinel-service</module>
+		<module>admin-server</module>
+		<module>config-client</module>
+		<module>retrofit-service</module>
+		<module>ribbon-service</module>
+		<module>user-service</module>
+		<module>sentinel-service</module>
 	</modules>
 	
 </project>

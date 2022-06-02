@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>net.xzh</groupId>
-    <artifactId>nacos-user-service</artifactId>
+    <artifactId>user-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>unacos-user-service</name>
-    <description>nacos-user-service</description>
+    <name>user-service</name>
+    <description>user-service</description>
 
     <properties>
         <java.version>1.8</java.version>

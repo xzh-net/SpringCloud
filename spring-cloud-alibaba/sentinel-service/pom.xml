@@ -3,18 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>net.xzh</groupId>
-	<artifactId>nacos-retrofit-service</artifactId>
+	<artifactId>sentinel-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nacos-retrofit-service</name>
-	<description>nacos-retrofit-service</description>
+	<name>sentinel-service</name>
+	<description>sentinel-service</description>
 
 	<properties>
-		<java.version>1.8</java.version>
 		<spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
 		<spring-boot-dependencies.version>2.6.3</spring-boot-dependencies.version>
 		<spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -28,7 +27,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.csp</groupId>
+			<artifactId>sentinel-datasource-nacos</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -47,12 +54,6 @@
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 			<version>4.6.3</version>
-		</dependency>
-		<!--Retrofit依赖 -->
-		<dependency>
-			<groupId>com.github.lianjiatech</groupId>
-			<artifactId>retrofit-spring-boot-starter</artifactId>
-			<version>2.2.3</version>
 		</dependency>
 	</dependencies>
 
