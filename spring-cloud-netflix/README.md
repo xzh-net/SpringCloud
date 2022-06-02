@@ -507,7 +507,6 @@ http://localhost:8801/actuator/routes/details
     http://localhost:8201/user/getByUsername?username=xzh
     ```
     
-
   - StripPrefix 
 
     对指定数量的路径前缀进行去除的过滤器
@@ -630,7 +629,9 @@ http://localhost:8801/actuator/routes/details
                   basedOnPreviousValue: false
     ```
 
-    - 当调用返回500时会进行重试，访问测试地址：http://localhost:9201/user/111，user-service控制台报错2次，说明进行了一次重试
+    - 当调用返回500时会进行重试，访问测试地址：http://localhost:9201/user/111
+    
+      user-service控制台报错2次，说明进行了一次重试
 
 - 限流
 
