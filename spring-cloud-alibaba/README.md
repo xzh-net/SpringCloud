@@ -13,12 +13,12 @@ mvn clean package
 
 ```
 spring-cloud-alibaba
-├── nacos-admin -- 微服务监控
-├── nacos-config-client -- 配置中心客户端
-├── nacos-sentinel-service -- 整合sentinel
-├── nacos-user-service  -- 注册到nacos的提供User对象CRUD接口的服务
-├── nacos-ribbon-service -- 原生ribbon集成微服务调用示例
-└── nacos-retrofit-service -- 整合retrofit
+├── admin -- 微服务监控
+├── config-client -- 配置中心客户端
+├── sentinel-service -- 整合sentinel
+├── user-service  -- 注册到nacos的提供User对象CRUD接口的服务
+├── ribbon-service -- 原生ribbon集成微服务调用示例
+└── retrofit-service -- 整合retrofit
 ```
 
 ## 1. 微服务监控（nacos-admin）
@@ -53,9 +53,17 @@ cloud:
       server-addr: 172.17.17.137:8848
 ```
 
-## 2. 配置中心客户端（nacos-config-client）
+## 2. 配置中心客户端（config-client）
 
 从springboot 2.4以后，默认不加载bootstrap配置文件，需要添加依赖
+
+```
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-bootstrap</artifactId>
+</dependency>
+```
+
 nacos配置添加`nacos-config-client-dev.yaml`为Data ID文件，默认组，配置格式YAML
 
 ```
@@ -66,7 +74,7 @@ config:
 
 访问地址：http://127.0.0.1:9001/configInfo
 
-## 3. 整合sentinel（nacos-sentinel-service）
+## 3. 整合sentinel（sentinel-service）
 
 - 自定义限流
   - 按资源名，在本类中使用`blockHandler`指定限流逻辑（可以自定义消息，推荐）
@@ -202,12 +210,12 @@ config:
 
 
 
-## 4. 配合测试项目（nacos-user-service）
+## 4. 配合测试项目（user-service）
 
 模拟基础用户的CRUD
 
 
-## 5. 整合Ribbon（nacos-ribbon-service）
+## 5. 整合Ribbon（ribbon-service）
 
 原生ribbon集成微服务调用示例
 
@@ -221,7 +229,7 @@ config:
 ```
 
 
-## 6. 整合Retrofit（nacos-retrofit-service）
+## 6. 整合Retrofit（retrofit-service）
 
 访问地址：http://127.0.0.1:9003/breaker/fallback/1
 

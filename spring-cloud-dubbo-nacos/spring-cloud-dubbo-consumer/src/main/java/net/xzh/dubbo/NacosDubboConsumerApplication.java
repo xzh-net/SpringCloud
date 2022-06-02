@@ -12,8 +12,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ScDubboConsumerApplication {
+public class NacosDubboConsumerApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ScDubboConsumerApplication.class);
+		SpringApplication.run(NacosDubboConsumerApplication.class);
 	}
 }

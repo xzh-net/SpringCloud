@@ -13,18 +13,18 @@ mvn clean package
 
 ```
 spring-cloud-eureka
-├── eureka-server -- 注册中心9001
 ├── config-server -- 配置中心8001
 ├── config-client -- 配置中心客户端8101
 ├── user-service  --  用户服务8201
 ├── ribbon-service -- ribbon整合8301
 ├── hystrix-service -- hystrix整合8401
-├── feign-service  -- feign整合8701
 ├── hystrix-dashboard -- hystrix控制台8501
 ├── turbine-service -- hystrix聚合监控8601
+├── feign-service  -- feign整合8701
+├── gateway-server -- gateway网关服务8801
+├── zuul-server -- zuul网关服务8801
 ├── admin-server -- 微服务监控8901
-└── gateway-server -- gateway网关服务8801
-└── zuul-server -- zuul网关服务8801
+└── eureka-server -- 注册中心9001
 ```
 
 
@@ -211,7 +211,7 @@ http://127.0.0.1:8801/actuator/route
 
 http://localhost:8801/actuator/routes/details
 
-## 11. gateway网关服务（gateway-server）
+## 12. gateway网关服务（gateway-server）
 
 - 路由
 

@@ -1,0 +1,21 @@
+server:
+  port: 7001
+spring:
+  application:
+    name: nacos-dubbo-provider
+  main:
+    allow-circular-references: true
+  cloud:
+    nacos:
+      discovery:
+        namespace: 52c42c43-adae-4f52-91d0-7bdaf28d2ac9 
+        server-addr: 172.17.17.137:8848 #Nacos地址
+dubbo:
+  scan:
+    base-packages: net.xzh.dubbo.service # 开启包扫描
+  protocols:
+    dubbo:
+      name: dubbo # 服务协议
+      port: 20883 # 服务端口
+  registry:
+    address: spring-cloud://172.17.17.137:8848 # 注册中心
