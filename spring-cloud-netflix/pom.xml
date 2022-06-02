@@ -15,6 +15,7 @@
 		<module>config-server</module>
 		<module>admin-server</module>
 		<module>zuul-server</module>
+		<module>gateway-server</module>
 		
 		<module>config-client</module>
 		
