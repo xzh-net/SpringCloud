@@ -6,22 +6,22 @@ mvn clean package
 ```
 
 ```
-<spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
 <spring-boot-dependencies.version>2.6.3</spring-boot-dependencies.version>
 <spring-cloud-dependencies.version>2021.0.1</spring-cloud-dependencies.version>
+<spring-cloud-alibaba-dependencies.version>2021.0.1.0</spring-cloud-alibaba-dependencies.version>
 ```
 
 ```
 spring-cloud-alibaba
-├── admin -- 微服务监控
-├── config-client -- 配置中心客户端
-├── sentinel-service -- 整合sentinel
-├── user-service  -- 注册到nacos的提供User对象CRUD接口的服务
-├── ribbon-service -- 原生ribbon集成微服务调用示例
-└── retrofit-service -- 整合retrofit
+├── admin-server -- 微服务监控9101
+├── config-client -- 配置中心客户端 9201
+├── retrofit-service -- 整合retrofit 9301
+├── ribbon-service -- 原生ribbon集成微服务调用示例 9401
+├── sentinel-service -- 整合sentinel 9501
+└── user-service  -- 注册到nacos的提供User对象CRUD接口的服务 9601
 ```
 
-## 1. 微服务监控（nacos-admin）
+## 1. 微服务监控（admin-server）
 
 - 访问地址：http://127.0.0.1:9000
 - 客户端配置端点

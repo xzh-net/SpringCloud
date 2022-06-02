@@ -2,11 +2,11 @@
 
 
 ```
-spring-cloud-netflix
-spring-cloud-alibaba
+spring-cloud-dubbo 7000
+spring-cloud-netflix 8000
+spring-cloud-alibaba 9000
 spring-cloud-consul
 spring-cloud-knife4j
-spring-cloud-dubbo
 ```
 
 
