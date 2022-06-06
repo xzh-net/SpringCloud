@@ -9,8 +9,8 @@
 	<version>1.0.0</version>
 
 	<modules>
-		<module>spring-cloud-gateway</module>
-		<module>spring-cloud-user</module>
+		<module>gateway-server</module>
+		<module>user-service</module>
 	</modules>
 
 	<properties>

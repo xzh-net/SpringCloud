@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class Knife4jUserApplication {
+public class Knife4jUserServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Knife4jUserApplication.class, args);
+        SpringApplication.run(Knife4jUserServiceApplication.class, args);
     }
 
 }
