@@ -2,9 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-cloud-dubbo-consumer</artifactId>
-	<name>spring-cloud-dubbo-consumer</name>
-	<description>spring-cloud-dubbo-consumer</description>
+	<artifactId>nacos-dubbo-consumer</artifactId>
+	<name>nacos-dubbo-consumer</name>
+	<description>nacos-dubbo-consumer</description>
 	<packaging>jar</packaging>
 
 	<properties>

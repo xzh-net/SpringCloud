@@ -4,15 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>	
 	<groupId>net.xzh.dubbo</groupId>
 	
-	<artifactId>spring-cloud-dubbo-nacos</artifactId>
-	<name>spring-cloud-dubbo-nacos</name>
-	<description>spring-cloud-dubbo-nacos</description>
+	<artifactId>spring-cloud-dubbo</artifactId>
+	<name>spring-cloud-dubbo</name>
+	<description>spring-cloud-dubbo</description>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<modules>
-		<module>spring-cloud-dubbo-consumer</module>
-		<module>spring-cloud-dubbo-provider</module>
+		<module>nacos-dubbo-consumer</module>
+		<module>nacos-dubbo-provider</module>
 	</modules>
 	
 </project>
