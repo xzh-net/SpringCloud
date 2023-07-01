@@ -212,7 +212,7 @@ config:
 
 ## 4. 配合测试项目（user-service）
 
-模拟基础用户的CRUD
+模拟基础用户的CRUD，以指定ip段注册
 
 
 ## 5. 整合Ribbon（ribbon-service）
