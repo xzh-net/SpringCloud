@@ -39,7 +39,7 @@ spring-cloud-eureka
 
 
 
-## 3.  配置中心客户端（config-eureka）
+## 3.  配置中心客户端（config-client）
 
 - 访问地址：http://127.0.0.1:8101/index
 
