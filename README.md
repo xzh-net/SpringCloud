@@ -2,6 +2,7 @@
 
 
 ```
+spring-cloud-oauth2    --3001
 spring-cloud-zookeeper --4001
 spring-cloud-knife4j   --5001
 spring-cloud-consul    --6001
