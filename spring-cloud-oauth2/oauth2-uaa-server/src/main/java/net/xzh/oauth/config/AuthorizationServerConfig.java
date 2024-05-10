@@ -30,11 +30,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * 配置客户端详情
+	 */
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.withClientDetails(jdbcClientDetailsService());
 	}
 
+	/**
+	 * 配置令牌访问端点和令牌服务
+	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		// JwtToken存储
@@ -48,7 +54,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				// 注入WebSecurityConfig配置的bean
 				.authenticationManager(authenticationManager);
 	}
-
+	/**
+	 * 配置令牌端点的安全约束
+	 */
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 		// 对获取Token的请求不再拦截
