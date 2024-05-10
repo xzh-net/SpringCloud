@@ -9,6 +9,6 @@ public class UaaServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(UaaServerApplication.class, args);
     }
-
+    //new BCryptPasswordEncoder().encode("123321")
 }
 
