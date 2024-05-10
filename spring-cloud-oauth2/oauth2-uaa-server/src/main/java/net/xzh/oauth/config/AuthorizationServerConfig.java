@@ -44,7 +44,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		//存储到数据库中
 		endpoints.tokenStore(tokenStore())
 				// 自定义授权跳转
-        		//.pathMapping("/oauth/confirm_access", "/custom/confirm_access")
+        		.pathMapping("/oauth/confirm_access", "/custom/confirm_access")
 				// 注入WebSecurityConfig配置的bean
 				.authenticationManager(authenticationManager);
 	}

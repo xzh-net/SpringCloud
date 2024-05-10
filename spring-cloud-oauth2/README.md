@@ -8,9 +8,8 @@
 
 ## OAuth2标准接口
 - /oauth/authorize：授权端点
-- /oauth/token：获取令牌端点
-- /oauth/confirn_access：哟普农户确认授权提交端点
-- /oauth/error：授权服务器错误信息端点
+- /oauth/token：令牌端点
+- /oauth/confirn_access：用户确认授权提交端点（也就是自定义的授权页面端点）
+- /oauth/error：授权服务错误信息端点
 - /oauth/check_token：用于资源服务访问的令牌解析端点
 - /oauth/token_key：提供共有密钥的端点，如果使用JWT令牌的话
-
