@@ -502,9 +502,9 @@ public JwtAccessTokenConverter jwtAccessTokenConverter() {
 
 
 
-## 4. 附带sql
+## 5. 附带sql
 
-### 4.1 oauth_client_details （授权码）
+### 5.1 oauth_client_details （授权码）
 
 > 主要操作`oauth_client_details`表的类是`JdbcClientDetailsService.java`
 
@@ -533,7 +533,7 @@ CREATE TABLE `oauth_client_details` (
 
 
 
-### 4.2 oauth_code(支持授权码获取accessToken)
+### 5.2 oauth_code(支持授权码获取accessToken)
 
 ```sql
 CREATE TABLE IF NOT EXISTS `oauth_code` (
@@ -545,7 +545,7 @@ DEFAULT CHARACTER SET = utf8;
 
 
 
-### 4.3 oauth_access_token（余下方式使用）
+### 5.3 oauth_access_token（余下方式使用）
 
 > 对`oauth_client_token`表的主要操作在`JdbcClientTokenServices.java`，实际上未使用到
 
@@ -563,7 +563,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 ```
 
-### 4.4 oauth_refresh_token（余下方式使用）
+### 5.4 oauth_refresh_token（余下方式使用）
 
 ```sql
 CREATE TABLE IF NOT EXISTS `oauth_refresh_token` (
