@@ -37,12 +37,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		// token存储到数据库中
-		//endpoints.tokenStore(tokenStore())
+		// JwtToken存储
+		//endpoints.accessTokenConverter(jwtAccessTokenConverter());//当使用jwt做为凭证的时候
+		//endpoints.tokenStore(jwtTokenStore())
 		
-		// 配置Token的存储方式
-		//endpoints.accessTokenConverter(jwtAccessTokenConverter());
+		//存储到数据库中
 		endpoints.tokenStore(tokenStore())
+				// 自定义授权跳转
+        		//.pathMapping("/oauth/confirm_access", "/custom/confirm_access")
 				// 注入WebSecurityConfig配置的bean
 				.authenticationManager(authenticationManager);
 	}
@@ -66,7 +68,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("cjs");   //  Sets the JWT signing key
+        jwtAccessTokenConverter.setSigningKey("123");   //  Sets the JWT signing key
         return jwtAccessTokenConverter;
     }
 	
