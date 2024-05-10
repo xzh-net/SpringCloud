@@ -45,6 +45,39 @@ INSERT INTO `oauth_client_details` VALUES ('UserManagement', NULL, '$2a$10$ZRmPF
 COMMIT;
 
 -- ----------------------------
+-- Table structure for oauth_access_token
+-- ----------------------------
+DROP TABLE IF EXISTS `oauth_access_token`;
+CREATE TABLE `oauth_access_token`  (
+  `token_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `token` blob NULL,
+  `authentication_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `client_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `authentication` blob NULL,
+  `refresh_token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '存储生成的access_token' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oauth_access_token
+-- ----------------------------
+
+
+-- ----------------------------
+-- Table structure for oauth_refresh_token
+-- ----------------------------
+DROP TABLE IF EXISTS `oauth_refresh_token`;
+CREATE TABLE `oauth_refresh_token`  (
+  `token_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `token` blob NULL,
+  `authentication` blob NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '存储刷新令牌的refresh_token' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of oauth_refresh_token
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_permission`;
