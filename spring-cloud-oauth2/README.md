@@ -13,3 +13,4 @@
 - /oauth/error：授权服务器错误信息端点
 - /oauth/check_token：用于资源服务访问的令牌解析端点
 - /oauth/token_key：提供共有密钥的端点，如果使用JWT令牌的话
+
