@@ -27,6 +27,11 @@ oauth2-web-client-user前后端分离的单点登录与单点登出
    
 3. 请求头
 
+   | 参数名        | 参数值                          | 是否必须 | 类型   | 说明                                                         |
+   | :------------ | :------------------------------ | :------- | :----- | :----------------------------------------------------------- |
+   | Authorization | Basic {clientId}:{clientSecret} | 是       | string | {clientId}:{clientSecret} 的值必需使用base64加密，clientId为应用id，clientSecret为应用密钥 |
+
+   ![](assets/authorization_code3.png)
    ![](assets/authorization_code2.png)
 
 4. 请求参数
@@ -37,7 +42,7 @@ oauth2-web-client-user前后端分离的单点登录与单点登出
    | username     |          | 是       | string | 用户名   |
    | password     |          | 是       | string | 密码     |
    | account_type |          | 否       | string | 用户类型 |
-   
+
 5. 返回示例
 
    ```
@@ -101,6 +106,11 @@ access_token 只能通过 authorization_code的方式获取真正的access_token
    
 3. 请求头
 
+   | 参数名        | 参数值                          | 是否必须 | 类型   | 说明                                                         |
+   | :------------ | :------------------------------ | :------- | :----- | :----------------------------------------------------------- |
+   | Authorization | Basic {clientId}:{clientSecret} | 是       | string | {clientId}:{clientSecret} 的值必需使用base64加密，clientId为应用id，clientSecret为应用密钥 |
+
+   ![](assets/authorization_code3.png)
    ![](assets/authorization_code2.png)
 
 4. 请求参数
@@ -177,6 +187,11 @@ access_token 只能通过 authorization_code的方式获取真正的access_token
 
 3. 请求头
 
+   | 参数名        | 参数值                          | 是否必须 | 类型   | 说明                                                         |
+   | :------------ | :------------------------------ | :------- | :----- | :----------------------------------------------------------- |
+   | Authorization | Basic {clientId}:{clientSecret} | 是       | string | {clientId}:{clientSecret} 的值必需使用base64加密，clientId为应用id，clientSecret为应用密钥 |
+
+   ![](assets/authorization_code3.png)
    ![](assets/authorization_code2.png)
 
 4. 请求参数
@@ -207,16 +222,93 @@ access_token 只能通过 authorization_code的方式获取真正的access_token
 
    
 
-### 2.5 手动刷新token
+### 2.5 刷新token
+
+1. 请求地址
+   
+   http://localhost:8080/oauth/token?grant_type=refresh_token&refresh_token={refresh_token}
+   
+2. 请求方式
+   POST
+
+3. 请求头
+
+   | 参数名        | 参数值                          | 是否必须 | 类型   | 说明                                                         |
+   | :------------ | :------------------------------ | :------- | :----- | :----------------------------------------------------------- |
+   | Authorization | Basic {clientId}:{clientSecret} | 是       | string | {clientId}:{clientSecret} 的值必需使用base64加密，clientId为应用id，clientSecret为应用密钥 |
+
+   ![](assets/authorization_code3.png)
+   ![](assets/authorization_code2.png)
+
+
+4. 请求参数
+
+   | 参数名        | 参数值        | 是否必须 | 类型   | 说明          |
+   | :------------ | :------------ | :------- | :----- | :------------ |
+   | grant_type    | refresh_token | 是       | string | 授权类型      |
+   | refresh_token |               | 是       | string | 刷新token的值 |
+
+5. 返回示例
+
+   刷新token后access_token会改变，而且expires延长，refresh_token则不会改变
+   
+   ```
+{
+       "access_token": "89e35d2a-847b-45d4-b04d-28dc536316e2",
+       "token_type": "bearer",
+       "refresh_token": "f2720215-e60c-4a55-8854-dcd06e011a58",
+       "expires_in": 7199,
+       "scope": "all"
+   }
+   ```
+   
+   
+
 
 ### 2.6 检查token有效性
 
-### 2.7 获取JWT公钥
+1. 请求地址
+   
+   http://localhost:8080/oauth/check_token?token={access_token}
+   
+2. 请求方式
+   POST
 
+3. 请求头
 
+   | 参数名        | 参数值                          | 是否必须 | 类型   | 说明                                                         |
+   | :------------ | :------------------------------ | :------- | :----- | :----------------------------------------------------------- |
+   | Authorization | Basic {clientId}:{clientSecret} | 是       | string | {clientId}:{clientSecret} 的值必需使用base64加密，clientId为应用id，clientSecret为应用密钥 |
 
+   ![](assets/authorization_code3.png)
+   ![](assets/authorization_code2.png)
 
+4. 请求参数
 
+   | 参数名 | 是否必须 | 类型   | 说明            |
+   | :----- | :------- | :----- | :-------------- |
+   | token  | 是       | string | 需要检查的token |
+
+5. 返回示例
+
+   ```
+   {
+       "exp": 1715361433,
+       "user_name": "admin",
+       "authorities": [
+           "1",
+           "2",
+           "3"
+       ],
+       "client_id": "OrderManagement",
+       "scope": [
+           "all"
+       ]
+   }
+   ```
+
+   
+### 2.8 账号登出
 
 ## 3. OAuth2标准接口
 
@@ -414,10 +506,71 @@ public JwtAccessTokenConverter jwtAccessTokenConverter() {
 
 ### 4.1 oauth_client_details （授权码）
 
+> 主要操作`oauth_client_details`表的类是`JdbcClientDetailsService.java`
+
+```sql
+DROP TABLE IF EXISTS `oauth_client_details`;
+
+CREATE TABLE `oauth_client_details` (
+  `client_id` varchar(255) NOT NULL COMMENT '客户端标识',
+  `resource_ids` varchar(255) DEFAULT NULL COMMENT '接入资源列表',
+  `client_secret` varchar(255) DEFAULT NULL COMMENT '客户端秘钥',
+  `scope` varchar(255) DEFAULT NULL, 
+  `authorized_grant_types` varchar(255) DEFAULT NULL,
+  `web_server_redirect_uri` varchar(255) DEFAULT NULL,
+  `authorities` varchar(255) DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL,
+  `refresh_token_validity` int(11) DEFAULT NULL,
+  `additional_information` longtext,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `archived` tinyint(4) DEFAULT NULL,
+  `trusted` tinyint(4) DEFAULT NULL,
+  `autoapprove` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`client_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='接入客户端信息';
+
+```
+
+
+
 ### 4.2 oauth_code(支持授权码获取accessToken)
+
+```sql
+CREATE TABLE IF NOT EXISTS `oauth_code` (
+  `code` VARCHAR(256) NULL DEFAULT NULL,
+  `authentication` BLOB NULL DEFAULT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+```
+
+
 
 ### 4.3 oauth_access_token（余下方式使用）
 
+> 对`oauth_client_token`表的主要操作在`JdbcClientTokenServices.java`，实际上未使用到
+
+```
+CREATE TABLE IF NOT EXISTS `oauth_access_token` (
+  `token_id` VARCHAR(256) NULL DEFAULT NULL,
+  `token` BLOB NULL DEFAULT NULL,
+  `authentication_id` VARCHAR(128) NOT NULL,
+  `user_name` VARCHAR(256) NULL DEFAULT NULL,
+  `client_id` VARCHAR(256) NULL DEFAULT NULL,
+  `authentication` BLOB NULL DEFAULT NULL,
+  `refresh_token` VARCHAR(256) NULL DEFAULT NULL,
+  PRIMARY KEY (`authentication_id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+```
+
 ### 4.4 oauth_refresh_token（余下方式使用）
 
+```sql
+CREATE TABLE IF NOT EXISTS `oauth_refresh_token` (
+  `token_id` VARCHAR(256) NULL DEFAULT NULL,
+  `token` BLOB NULL DEFAULT NULL,
+  `authentication` BLOB NULL DEFAULT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+```
 

@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import net.xzh.oauth.service.MyUserDetailsService;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -27,6 +29,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private DataSource dataSource;
 
+	@Autowired
+	private MyUserDetailsService userDetailsService;
+	
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -49,10 +54,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		
 		//存储到数据库中
 		endpoints.tokenStore(tokenStore())
-				// 自定义授权跳转
-        		.pathMapping("/oauth/confirm_access", "/custom/confirm_access")
-				// 注入WebSecurityConfig配置的bean
-				.authenticationManager(authenticationManager);
+				.userDetailsService(userDetailsService)// 读取验证用户信息
+        		.pathMapping("/oauth/confirm_access", "/custom/confirm_access")// 自定义授权跳转
+				.authenticationManager(authenticationManager);// 注入WebSecurityConfig配置的bean
 	}
 	/**
 	 * 配置令牌端点的安全约束
