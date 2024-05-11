@@ -574,3 +574,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 ```
 
+## 6. 其他
+
+> 编译中发现使用mvn package打包后的项目无法运行，提示容器中缺少bean，同样代码在idea中运行正常，怀疑是注入依赖的加载顺序有关系，使用@AutoConfigureAfter标签强制改变顺序。

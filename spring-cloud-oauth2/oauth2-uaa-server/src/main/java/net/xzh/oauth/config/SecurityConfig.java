@@ -1,6 +1,7 @@
 package net.xzh.oauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import net.xzh.oauth.service.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@AutoConfigureAfter(AuthorizationServerConfig.class)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
