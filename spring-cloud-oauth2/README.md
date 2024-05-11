@@ -308,7 +308,7 @@ access_token 只能通过 authorization_code的方式获取真正的access_token
    ```
 
    
-### 2.8 账号登出
+### 2.7 账号登出
 
 ## 3. OAuth2标准接口
 
