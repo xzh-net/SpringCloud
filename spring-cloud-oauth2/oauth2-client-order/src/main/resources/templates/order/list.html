@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta content="text/html;charset=UTF-8">
-    <title>订单列表</title>
+    <title>订单管理</title>
 </head>
 <body>
 <div>
@@ -10,7 +10,8 @@
     <p>权限: <span th:text="${authorities}"></span></p>
     <p>应用id: <span th:text="${clientId}"></span></p>
     <p>token: <span th:text="${token}"></span></p>
-    <p><input type="button" value="登出" onclick="location='/logout'"/></p>
+    <p><a th:href="@{/logout}">退出</a> </p>
 </div>
+<h2><a href="http://localhost:8082/memberSystem/member/list">会员管理</a></h2>
 </body>
 </html>

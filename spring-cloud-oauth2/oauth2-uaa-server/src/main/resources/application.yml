@@ -1,7 +1,9 @@
+server:
+  port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.17.17.161:3306/permission
+    url: jdbc:mysql://172.17.17.137:3306/permission
     username: root
     password: root
   jpa:
@@ -9,7 +11,7 @@ spring:
   session:
     store-type: redis
   redis:
-    host: 172.17.17.161
-    port: 6379
-server:
-  port: 8080
+    host: 172.17.17.192
+    port: 16386
+    password: redis16386
+    database: 11

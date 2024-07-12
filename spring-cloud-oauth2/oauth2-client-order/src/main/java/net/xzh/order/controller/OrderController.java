@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @date 2019-03-03
  */
 @Controller
+@RequestMapping("/order")
 public class OrderController {
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String list(ModelMap modelMap, Authentication authentication) {
         OAuth2Authentication oauth2Authentication = (OAuth2Authentication)authentication;
         modelMap.put("username", oauth2Authentication.getName());
