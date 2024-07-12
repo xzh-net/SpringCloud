@@ -6,10 +6,15 @@
 oauth2-uaa-server
 
 ### 1.2 非前后端分离客户端
-oauth2-client-order使用springSecurity来实现自动单点登录，非前后端分离
+
+使用springSecurity来实现自动单点登录
+
+oauth2-client-order 订单中心
+
+oauth2-client-member 会员中心
 
 ### 1.3 前后端分离客户端
-oauth2-web-client-user前后端分离的单点登录与单点登出
+oauth2-web-portal 前后端分离的单点登录与单点登出
 
 
 ## 2. 核心接口
