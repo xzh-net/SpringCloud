@@ -5,13 +5,10 @@
     <title>订单管理</title>
 </head>
 <body>
-<div>
-    <p>登录者: <span th:text="${username}"></span></p>
+	<h3>这是订单中心，<a href="http://localhost:8082/memberSystem/member/list">前往会员中心</a>，<a th:href="@{/logout}">退出</a></h3>
+    <p>当前登录用户: <span th:text="${username}"></span></p>
     <p>权限: <span th:text="${authorities}"></span></p>
     <p>应用id: <span th:text="${clientId}"></span></p>
     <p>token: <span th:text="${token}"></span></p>
-    <p><a th:href="@{/logout}">退出</a> </p>
-</div>
-<h2><a href="http://localhost:8082/memberSystem/member/list">会员管理</a></h2>
 </body>
 </html>
