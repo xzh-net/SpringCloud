@@ -42,6 +42,7 @@ CREATE TABLE `oauth_client_details` (
 BEGIN;
 INSERT INTO `oauth_client_details` VALUES ('OrderManagement', NULL, '$2a$10$8yVwRGY6zB8wv5o0kRgD0ep/HVcvtSZUZsYu/586Egxc1hv3cI9Q6', 'all', 'authorization_code,refresh_token', 'http://localhost:8083/orderSystem/login', NULL, 7200, NULL, NULL, 'true');
 INSERT INTO `oauth_client_details` VALUES ('UserManagement', NULL, '$2a$10$ZRmPFVgE6o2aoaK6hv49pOt5BZIKBDLywCaFkuAs6zYmRkpKHgyuO', 'all', 'authorization_code,refresh_token', 'http://localhost:8082/memberSystem/login', NULL, 7200, NULL, NULL, 'true');
+INSERT INTO `oauth_client_details` VALUES ('portal', NULL, '$2a$10$0T0EU8yMOZPnk.5pjSdkSug8SSHP8feFqImM2b/CeySBoQwJEQNBG', 'app', 'authorization_code,refresh_token,password', 'http://127.0.0.1:8081/callback.html', NULL, 7200, NULL, NULL, 'true');
 COMMIT;
 
 -- ----------------------------
