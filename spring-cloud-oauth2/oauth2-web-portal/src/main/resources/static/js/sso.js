@@ -2,7 +2,7 @@ const FULL_CHARTER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopgrstuvwxyz';
 //应用id
 let clientId = 'portal';
 //授权中心地址
-let uaaUri = 'http://127.0.0.1:8080/oauth';
+let uaaUri = 'http://127.0.0.1:8080/oauth/';
 
 function getAuthorizeUri(state) {
     return uaaUri+'authorize?client_id='+clientId+'&redirect_uri=http://127.0.0.1:8081/callback.html&response_type=code&state='+state;

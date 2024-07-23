@@ -45,8 +45,8 @@ public class HomeController {
     @Value("${zlt.sso.access-token-uri:}")
     private String accessTokenUri;
 
-    @Value("${zlt.sso.user-info-uri:}")
-    private String userInfoUri;
+    @Value("${zlt.sso.token-info-uri:}")
+    private String tokenInfoUri;
 
     private final static Map<String, Map<String, Object>> localTokenMap = new HashMap<>();
 
@@ -57,10 +57,10 @@ public class HomeController {
         String accessToken = (String)tokenMap.get("access_token");
         //获取用户信息
         Map userMap = getUserInfo(accessToken);
-        List<String> roles = getRoles(userMap);
-
+        //获取用户角色
+        List<Map<String, String>> roles = (List<Map<String, String>>)userMap.get("authorities");
         Map result = new HashMap(2);
-        String username = (String)userMap.get("username");
+        String username = (String)userMap.get("user_name");
         result.put("username", username);
         result.put("roles", roles);
         localTokenMap.put(accessToken, result);
@@ -93,21 +93,22 @@ public class HomeController {
 
     /**
      * 获取用户信息
+     * @throws UnsupportedEncodingException 
      */
-    public Map getUserInfo(String accessToken) {
+    public Map getUserInfo(String accessToken) throws UnsupportedEncodingException {
         RestTemplate restTemplate = new RestTemplate();
-        Map result = restTemplate.getForObject(userInfoUri+"?access_token="+accessToken, Map.class);
-        return (Map)result.get("datas");
-    }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        byte[] authorization = (clientId + ":" + clientSecret).getBytes("UTF-8");
+        BASE64Encoder encoder = new BASE64Encoder();
+        String base64Auth = encoder.encode(authorization);
+        headers.add("Authorization", "Basic " + base64Auth);
 
-    private List<String> getRoles(Map userMap) {
-        List<Map<String, String>> roles = (List<Map<String, String>>)userMap.get("roles");
-        List<String> result = new ArrayList<>();
-        if (CollectionUtil.isNotEmpty(roles)) {
-            roles.forEach(e -> {
-                result.add(e.get("code"));
-            });
-        }
+        MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
+        param.add("token", accessToken);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(param, headers);
+        ResponseEntity<Map> response = restTemplate.postForEntity(tokenInfoUri, request , Map.class);
+        Map result = response.getBody();
         return result;
     }
 
