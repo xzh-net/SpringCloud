@@ -1,5 +1,6 @@
 # Spring Cloud
 
+Netflix使用2.1.7.RELEASE+Greenwich.SR5，Alibaba2021.0.1.0使用2.6.3+2021.0.1
 
 ```
 spring-cloud-oauth2    --3001
