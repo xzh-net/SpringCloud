@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by macro on 2019/9/5.
+ * Created 2019/9/5.
  */
 @Configuration
 public class FeignConfig {

@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

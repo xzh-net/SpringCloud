@@ -9,7 +9,7 @@ import retrofit2.http.*;
 
 /**
  * 定义Http接口，用于调用远程的User服务
- * Created by macro on 2019/9/5.
+ * Created 2019/9/5.
  */
 @RetrofitClient(serviceId = "user-service", fallback = UserFallbackService.class)
 public interface UserService {

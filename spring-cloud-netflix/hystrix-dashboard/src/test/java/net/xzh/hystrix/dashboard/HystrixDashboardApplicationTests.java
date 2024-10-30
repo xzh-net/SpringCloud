@@ -1,4 +1,4 @@
-package com.macro.cloud;
+package net.xzh.hystrix.dashboard;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

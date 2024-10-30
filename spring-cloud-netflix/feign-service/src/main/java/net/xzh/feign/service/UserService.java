@@ -8,7 +8,7 @@ import net.xzh.feign.domain.User;
 import net.xzh.feign.service.impl.UserFallbackService;
 
 /**
- * Created by macro on 2019/9/5.
+ * Created 2019/9/5.
  */
 @FeignClient(value = "user-service",fallback = UserFallbackService.class)
 public interface UserService {

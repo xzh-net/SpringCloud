@@ -7,7 +7,7 @@ import net.xzh.sentinel.domain.User;
 import net.xzh.sentinel.service.UserService;
 
 /**
- * Created by macro on 2019/9/5.
+ * Created 2019/9/5.
  */
 @Component
 public class UserFallbackService implements UserService {

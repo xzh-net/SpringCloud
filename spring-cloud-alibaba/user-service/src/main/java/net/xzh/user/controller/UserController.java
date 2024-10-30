@@ -12,7 +12,7 @@ import net.xzh.user.service.UserService;
 import java.util.List;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 @RestController
 @RequestMapping("/user")

@@ -5,7 +5,7 @@ import java.util.List;
 import net.xzh.consul.domain.User;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 public interface UserService {
     void create(User user);

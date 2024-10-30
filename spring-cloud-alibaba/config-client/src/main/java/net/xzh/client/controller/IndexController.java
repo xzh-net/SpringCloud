@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by macro on 2019/9/11.
+ * Created 2019/9/11.
  */
 @RestController
 @RefreshScope

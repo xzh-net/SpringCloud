@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Retrofit相关配置
- * Created by macro on 2022/1/26.
+ * Created 2022/1/26.
  */
 @Configuration
 public class RetrofitConfig {

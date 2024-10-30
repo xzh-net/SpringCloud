@@ -8,7 +8,7 @@ import net.xzh.retrofit.service.UserService;
 
 /**
  * 熔断降级处理类
- * Created by macro on 2019/9/5.
+ * Created 2019/9/5.
  */
 @Component
 public class UserFallbackService implements UserService {

@@ -10,7 +10,7 @@ import net.xzh.ribbon.domain.CommonResult;
 import net.xzh.ribbon.domain.User;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 @RestController
 @RequestMapping("/user")

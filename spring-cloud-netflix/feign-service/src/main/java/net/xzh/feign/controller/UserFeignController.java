@@ -8,7 +8,7 @@ import net.xzh.feign.domain.User;
 import net.xzh.feign.service.UserService;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 @RestController
 @RequestMapping("/user")

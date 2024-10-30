@@ -1,7 +1,7 @@
 package net.xzh.retrofit.domain;
 
 /**
- * Created by macro on 2019/8/29.
+ * Created 2019/8/29.
  */
 public class User {
 
